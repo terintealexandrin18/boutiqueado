@@ -40,11 +40,11 @@ body {
 
 .btn-outline-black {
     background: white;
-    color: black !important;
+    color: black !important; /* use important to override link colors for <a> elements */
     border: 1px solid black;
 }
 
-.btn-outline-black:hoover,
+.btn-outline-black:hover,
 .btn-outline-black:active,
 .btn-outline-black:focus {
     background: black;
@@ -83,10 +83,11 @@ body {
 	z-index: -1;
 }
 
-a.category-badge > span.badge:hoover {
+a.category-badge > span.badge:hover {
     background: #212529 !important;
     color: #fff !important;
 }
+
 .btt-button {
     height: 42px;
     width: 42px;
@@ -95,8 +96,27 @@ a.category-badge > span.badge:hoover {
     right: 10px;
 }
 
-.btt-link, .update-link, .remove-item {
+.btt-link,
+.update-link,
+.remove-item {
     cursor: pointer;
+}
+
+/* ------------------------------- bootstrap toasts */
+
+.message-container {
+    position: fixed;
+    top: 72px;
+    right: 15px;
+    z-index: 99999999999;
+}
+
+.custom-toast {
+    overflow: visible;
+}
+
+.toast-capper {
+    height: 2px;
 }
 
 /* -------------------------------- Media Queries */
