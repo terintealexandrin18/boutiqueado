@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 import os
+import dj_database_url
 
 from pathlib import Path
 
@@ -26,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=@3i4izhzn%8@4_v(udeu9^=ttx*m!*e9vs-3g+(9*@oyhfss_'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['8000-terintealex-boutiqueado-lwn31eys6yf.ws-eu110.gitpod.io', '8000-terintealex-boutiqueado-lwn31eys6yf.ws-eu111.gitpod.io']
+ALLOWED_HOSTS = ['8000-terintealex-boutiqueado-lwn31eys6yf.ws-eu110.gitpod.io', '8000-terintealex-boutiqueado-lwn31eys6yf.ws-eu111.gitpod.io', 'https://boutiqueadoat-d3ac0f97b1f3.herokuapp.com/']
 
 
 # Application definition
@@ -124,12 +125,18 @@ WSGI_APPLICATION = 'boutique_ado.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+if 'DATABASE_URL' in os.environ:
+    DATABASES = {
+        'default': dj_database_url.parse(os.environ.get('DATABASE_URL'))
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        }
+    }
+
 
 
 # Password validation
